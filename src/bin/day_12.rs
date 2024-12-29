@@ -113,7 +113,7 @@ fn main() {
     let mut total_price = 0;
 
     for region in &regions {
-        let plant = get_plant(*region.iter().next().unwrap());
+        let _ = get_plant(*region.iter().next().unwrap());
         let area = region.len();
         let perimeter = calc_perimeter(region);
         let price = area * perimeter;
