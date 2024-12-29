@@ -2,7 +2,10 @@ use std::fs;
 
 fn load_initial_arrangement() -> Vec<i64> {
     let content = fs::read_to_string("./resources/day_11.txt").expect("Failed to read the file");
-    content.split(" ").map(|c| c.parse().unwrap()).collect()
+    content
+        .split_whitespace()
+        .map(|c| c.parse::<i64>().expect("Invalid number in the file"))
+        .collect()
 }
 
 fn count_digits(mut num: i64) -> usize {
@@ -11,29 +14,27 @@ fn count_digits(mut num: i64) -> usize {
     }
     num = num.abs();
     let mut count = 0;
-
     while num > 0 {
         num /= 10;
         count += 1;
     }
-
     count
 }
 
 fn split_number(num: i64) -> (i64, i64) {
-    let chars = num.to_string().chars().collect::<Vec<char>>();
-    let (first_half, second_half) = chars.split_at(chars.len() / 2);
+    let num_str = num.abs().to_string();
+    let middle = num_str.len() / 2;
+
+    let first_half = &num_str[..middle];
+    let second_half = &num_str[middle..];
+
     (
         first_half
-            .iter()
-            .collect::<String>()
             .parse::<i64>()
-            .unwrap(),
+            .expect("Cannot split the first half of the number in two"),
         second_half
-            .iter()
-            .collect::<String>()
             .parse::<i64>()
-            .unwrap(),
+            .expect("Cannot split the second half of the number in two"),
     )
 }
 fn blink(arrangement: &mut Vec<i64>, n: i32) -> Vec<i64> {
