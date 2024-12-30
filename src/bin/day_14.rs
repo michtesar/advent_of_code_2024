@@ -72,7 +72,7 @@ fn count_quadrants(grid: &Vector2i, robots: &[Robot]) -> [i32; 4] {
 }
 
 fn main() {
-    let grid_dimensions = Vector2i { x: 11, y: 7 };
+    let grid_dimensions = Vector2i { x: 101, y: 103 };
     let mut robots = load_input();
 
     // Simulate robot movement for 100 seconds
